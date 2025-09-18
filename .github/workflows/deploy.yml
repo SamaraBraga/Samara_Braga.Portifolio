@@ -29,25 +29,27 @@ jobs:
             set -e
             cd /home/jocerlan || exit
 
-            if [ ! -d meu-Portifolio ]; then
+            if [ ! -d meu-portifolio ]; then
               echo '📥 Clonando projeto pela primeira vez...'
-              git clone https://github.com/SamaraBraga/Samara_Braga.Portifolio.git meu-Portifolio
+              git clone https://github.com/SamaraBraga/Samara_Braga.portifolio.git meu-portifolio
             else
-              if [ ! -d meu-Portifolio/.git ]; then
+              if [ ! -d meu-portifolio/.git ]; then
                 echo '⚠️ Pasta existe mas não é repositório Git, removendo...'
-                rm -rf meu-Portifolio
-                git clone https://github.com/SamaraBraga/Samara_Braga.Portifolio.git meu-Portifolio
+                rm -rf meu-portifolio
+                git clone https://github.com/SamaraBraga/Samara_Braga.portifolio.git meu-portifolio
               else
                 echo '🔄 Atualizando repositório existente...'
-                cd meu-Portifolio
+                cd meu-portifolio
                 git fetch origin main
                 git reset --hard origin/main
               fi
             fi
 
-            cd meu-Portifolio
+            cd meu-portifolio
 
             echo '🐳 Recriando container Docker...'
+            sudo docker stop site-samara || true
+            sudo docker rm site-samara || true
             sudo docker build -t site-samara .
             sudo docker run -d --restart always -p 8080:80 --name site-samara site-samara
           "
