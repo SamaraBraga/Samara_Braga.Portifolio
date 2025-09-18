@@ -42,6 +42,7 @@ jobs:
                 cd meu-portifolio
                 git fetch origin main
                 git reset --hard origin/main
+                cd ..
               fi
             fi
 
