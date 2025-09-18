@@ -48,8 +48,6 @@ jobs:
             cd meu-Portifolio
 
             echo '🐳 Recriando container Docker...'
-            sudo docker stop site-Samara || true
-            sudo docker rm site-Samara || true
             sudo docker build -t site-Samara .
             sudo docker run -d --restart always -p 8080:80 --name site-Samara site-Samara
           "
